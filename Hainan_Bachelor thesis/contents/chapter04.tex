@@ -1,0 +1,26 @@
+\section{基于聚类算法的入侵检测研究}
+
+\subsection{k-means算法介绍}
+k-means算法是一种简单的划分聚类算法，它通过计算样本之间的距离大小将样本集划分为k个簇。聚类目标是使同一个簇中的相关对象尽可能相互“接近”，而不同簇中的对象尽可能地“远离”。
+
+\IncMargin{1em} % 使得行号不向外突出 
+\begin{algorithm} 
+	\caption{kmeans}
+	\label{algo:1} 
+	\KwData{样本数据集 $D$, 聚类簇数 $k$} 
+	\KwResult{聚类集合} 
+	$r\leftarrow t$\; $\Delta B^{\ast}\leftarrow -\infty$\; \While{$\Delta B\leq \Delta B^{\ast}$ and $r\leq T$}{$Q\leftarrow\arg\max_{Q\geq 0}\Delta B^{Q}_{t,r}(I_{t-1},B_{t-1})$\; $\Delta B\leftarrow \Delta B^{Q}_{t,r}(I_{t-1},B_{t-1})/(r-t+1)$\; \If{$\Delta B\geq \Delta B^{\ast}$}{$Q^{\ast}\leftarrow Q$\; $\Delta B^{\ast}\leftarrow \Delta B$\;} $r\leftarrow r+1$\;} 
+\end{algorithm}
+\DecMargin{1em}
+
+从Algorithm \ref{algo:1}中可得 k-means 算法有以下缺点：
+\begin{enumerate}  
+	\item 聚类中心的k数量需要提前给出，但实际运用中，对于给定数据确定k值十分困难。很多时候我们不知道应该将这些数据集划分成几类最佳。
+	\item k-means算法的聚类中心是随机选择的，选择不好的初始聚类中心，可能导致完全不同的聚类结果。
+\end{enumerate}
+\subsection{最佳k值选择}
+
+
+\setcounter{table}{0}
+\setcounter{figure}{0}
+\setcounter{equation}{0}

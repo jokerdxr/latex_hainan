@@ -1,0 +1,127 @@
+\documentclass[article,12pt,a4paper,onesides,UTF8]{ctexart} % 期刊类型，全局默认小四字体，a4纸张，单面打印，调用ctex宏包
+% 等于\documentclass[UTF8]{article} 
+\usepackage{ctex}
+\usepackage[top=2.54cm,bottom=2.54cm,left=3.17cm,right=3.17cm]{geometry} % 调用geometry宏包设置页边距
+\usepackage{pdfpages} % 调用PDF宏包
+\usepackage{fancyhdr} % 页眉页脚
+\usepackage{graphicx} % 调用图片包
+\usepackage{caption} % 调用设置图片格式包
+\usepackage{enumerate} % 调用生成列表包 （1）海大四级标题
+\usepackage{enumitem} % 修改列表包
+\usepackage{setspace} % 调整行间距
+\usepackage{titletoc}
+\usepackage{titlesec} % 设置标题样式
+\usepackage[namelimits]{amsmath} %数学公式
+\usepackage{amssymb} % 数学公式
+\usepackage{amsfonts} % 数学字体
+\usepackage{mathrsfs} % 数学花体
+\usepackage{tabularx} % 表格
+\usepackage{booktabs} % 调整表格
+\usepackage{longtable} % 表格跨页，有问题
+\usepackage[ruled,linesnumbered]{algorithm2e} % 算法
+\usepackage[super,square,compress,sort]{natbib}% 参考文献样式
+% \usepackage{setspace}%调整行间距
+% \usepackage{fontspec} % 字体宏包，和PDF冲突……
+%% 全局设置
+% 设置字体
+\newcommand{\sanhao}{\fontsize{16pt}{\baselineskip}\selectfont} \newcommand{\xiaosan}{\fontsize{15pt}{\baselineskip}\selectfont} \newcommand{\sihao}{\fontsize{14pt}{\baselineskip}\selectfont} \newcommand{\xiaosi}{\fontsize{12pt}{\baselineskip}\selectfont} \newcommand{\wuhao}{\fontsize{10.5pt}{\baselineskip}\selectfont}
+% 设置字体
+
+%全行间距
+\renewcommand{\baselinestretch}{1.5}  % 调整全局行距为1.5
+
+% 各级标题调整
+\CTEXsetup[format={\sanhao\bfseries}]{section} % ctex中第一章标题默认居中，但是海大的要求顶格，重置为居左（\bfseries）。三号\粗体
+\CTEXsetup[format={\sihao\bfseries}]{subsection} % 二级标题四号加粗
+\CTEXsetup[format={\xiaosi\bfseries}]{subsubsection} % 三级标题小四加粗
+\setenumerate[enumerate]{fullwidth,itemindent=2em,listparindent=2em,label=(\arabic*)} % 设置四级标题，学校四级标题样式为（1）\setlist
+% itemindent:条目的缩进距离,listparindent 条目下面段
+
+%% 另外一种设置方式
+% \titleformat{\section}{\sanhao\bfseries}{\arabic{section} }{0.5em}{} % 设置标签与标题内容之间以一个字(0.5em)的宽度为间隔
+
+% \titleformat{\subsection}{\sihao\bfseries}{ \thesection.\arabic{subsection}}{0.5em}{} % 设置标签与标题内容之间以一个字(0.5em)的宽度为间隔
+
+%\titleformat{\subsubsection}{\xiaosi\bfseries}{ \thesection.\arabic{subsection}.\arabic{subsubsection}}{0.5em}{} % 设置标签与标题内容之间以一个字(0.5em)的宽度为间隔
+
+
+%页眉页脚
+\pagestyle{fancy} % 设置页眉
+\renewcommand{\headrulewidth}{0.4pt} % 页眉线宽度0.4pt，设0可去掉页眉线(默认为0)
+%% 全局设置
+
+% 目录样式
+\lhead{}
+\rhead{}
+\cfoot{}
+
+\titlecontents{section}[5mm] % 标题位置，左间距5毫米
+{\zihao{-4}} % 字号小四
+{\filleft\contentslabel{1em}} % 标题标志 (设置标题标志的格式，如序号格式、序号宽度、序号与标题内容之间的间距等，不可空置)
+{\hspace*{-1em}} %保证摘要等对齐  contentslabel 的距离与此处的hspace大小相等,正负相反,即可对齐
+{\titlerule*{.}\contentspage} % 指引线与页码 (设置标题与页码之间的指引线样式以及页码的格式，该参数如果空置，标题将无指引线和页码)
+
+\titlecontents{subsection}[9mm]
+{\xiaosi} % 字号小四
+{\contentslabel{2em}}
+{\hspace*{-2em}}
+{\titlerule*{.}\contentspage}
+
+\titlecontents{subsubsection}[11mm]
+{\xiaosi} % 字号小四
+{\contentslabel{2.5em}}
+{\hspace*{-2.5em}}
+{\titlerule*{.}\contentspage}
+% 目录样式
+
+% 图片设置
+\graphicspath{{graphics/}}%设置图片路径为当前路径下的graphics文件夹
+\renewcommand{\thefigure}{\wuhao{\thesection-\arabic{figure}}}
+% 图片命名默认样式是 图1：，按照论文要求格式改为 图1-1（无冒号）
+\captionsetup{labelformat=default,labelsep=space} % 去除冒号
+% 图片设置
+
+
+% 内容
+\begin{document}
+%封面
+\includepdf{contents/cover.pdf} % 调用学校已经排版好的封面
+%封面
+
+\chead{\zihao{5}基于k-means++的聚类算法研究}
+
+
+% 中英文摘要
+\include{contents/cnabstract}
+\include{contents/enabstract}
+% 中英文摘要
+
+% 目录
+\renewcommand{\contentsname}{\zihao{3}\centerline{目\quad\quad\quad\quad 录} }  % 修改默认样式，目录两字用三号字体，居中
+\tableofcontents   % 插入目录
+% 目录
+
+% 正文
+
+% 页眉页脚重新设置
+\newpage
+\rhead{} % ctex默认第一章标题在页眉右边，置空则取消
+\cfoot{\zihao{-5}\thepage} % 页脚显示页码，采用小五字体
+\pagenumbering{arabic}   %页码使用阿拉伯数字
+\setcounter{page}{1} % 将当前页码置为1
+
+% 论文各个章节
+\include{contents/chapter01} % 章节1
+\include{contents/chapter02} % 章节2
+\include{contents/chapter03} % 章节3
+\include{contents/chapter04} % 章节4
+\include{contents/chapter05} % 章节5
+\include{contents/acknowledgement} % 致谢
+
+% 参考文献
+\include{ref/references}
+
+% 附录
+\include{appendix/appendix}
+
+\end{document}
